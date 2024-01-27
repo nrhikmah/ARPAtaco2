@@ -53,11 +53,11 @@ class Tacotron2Logger(SummaryWriter):
                 gate_targets[idx].data.cpu().numpy(),
                 torch.sigmoid(gate_outputs[idx]).data.cpu().numpy()),
             iteration, dataformats='HWC')
-         self.add_image(
+        self.add_image(
             "alignment epoch",
             plot_alignment_to_numpy(alignments[idx].data.cpu().numpy().T),
             epoch, dataformats='HWC')
-         self.add_image(
+        self.add_image(
             "mel_target epoch",
             plot_spectrogram_to_numpy(mel_targets[idx].data.cpu().numpy()),
             epoch, dataformats='HWC')
