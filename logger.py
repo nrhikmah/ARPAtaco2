@@ -11,15 +11,15 @@ class Tacotron2Logger(SummaryWriter):
 
     def log_training(self, reduced_loss, grad_norm, learning_rate, duration,
                      iteration, epoch):
-            self.add_scalar("training.loss", reduced_loss, iteration)
-            self.add_scalar("grad.norm", grad_norm, iteration)
-            self.add_scalar("learning.rate", learning_rate, iteration)
-            self.add_scalar("duration", duration, iteration)
+            self.add_scalar("training.loss.iter", reduced_loss, iteration)
+            self.add_scalar("grad.norm.iter", grad_norm, iteration)
+            self.add_scalar("learning.rate.iter", learning_rate, iteration)
+            self.add_scalar("duration.iter", duration, iteration)
                 # tambahan coder untuk tampilkan epoch         
-            self.add_scalar("training.loss", reduced_loss, epoch)
-            self.add_scalar("grad.norm", grad_norm, epoch)
-            self.add_scalar("learning.rate", learning_rate, epoch)
-            self.add_scalar("duration", duration, epoch)             
+            self.add_scalar("training.loss.epoch", reduced_loss, epoch)
+            self.add_scalar("grad.norm.epoch", grad_norm, epoch)
+            self.add_scalar("learning.rate.epoch", learning_rate, epoch)
+            self.add_scalar("duration.epoch", duration, epoch)             
 
     def log_validation(self, reduced_loss, model, y, y_pred, iteration, epoch):
         self.add_scalar("validation.loss.iteration", reduced_loss, iteration)
