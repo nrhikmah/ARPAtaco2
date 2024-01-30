@@ -8,7 +8,11 @@ from plotting_utils import plot_gate_outputs_to_numpy
 class Tacotron2Logger(SummaryWriter):
     def __init__(self, logdir):
         super(Tacotron2Logger, self).__init__(logdir)
-
+        
+    def log_loss(self, train_loss, val_loss, iteration, epoch):
+            self.add_scalars('loss', {'train_loss': train_loss,
+                                      'val_loss': val_loss,}, epoch)
+    
     def log_training(self, reduced_loss, grad_norm, learning_rate, duration,
                      iteration, epoch):
             self.add_scalar("training.loss.iter", reduced_loss, iteration)
