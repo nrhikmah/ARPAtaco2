@@ -11,21 +11,31 @@ class Tacotron2Logger(SummaryWriter):
         
     def log_loss(self, train_loss, val_loss, iteration, epoch):
             self.add_scalars('loss_epoch', {'train_loss': train_loss,
-                                      'val_loss': val_loss,}, epoch)
+                                      'val_loss': val_loss}, epoch)
             self.add_scalars('loss_iter', {'train_loss': train_loss,
-                                      'val_loss': val_loss,}, iteration)
+                                      'val_loss': val_loss}, iteration)
     
     def log_training(self, reduced_loss, grad_norm, learning_rate, duration,
                      iteration, epoch):
-            self.add_scalar("training.loss.iter", reduced_loss, iteration)
-            self.add_scalar("grad.norm.iter", grad_norm, iteration)
-            self.add_scalar("learning.rate.iter", learning_rate, iteration)
-            self.add_scalar("duration.iter", duration, iteration)
+            self.add_scalars('log_training_epoch', {'loss': reduced_loss,
+                                      'grad_norm': grad_norm, 
+                                      'learning_rate': learning_rate,
+                                      'duration': duration}, epoch)
+                         
+            self.add_scalars('log_training_iter', {'loss': reduced_loss,
+                                      'grad_norm': grad_norm, 
+                                      'learning_rate': learning_rate,
+                                      'duration': duration}, iteration)   
+                         
+            # self.add_scalar("training.loss.iter", reduced_loss, iteration)
+            # self.add_scalar("grad.norm.iter", grad_norm, iteration)
+            # self.add_scalar("learning.rate.iter", learning_rate, iteration)
+            # self.add_scalar("duration.iter", duration, iteration)
                 # tambahan coder untuk tampilkan epoch         
-            self.add_scalar("training.loss.epoch", reduced_loss, epoch)
-            self.add_scalar("grad.norm.epoch", grad_norm, epoch)
-            self.add_scalar("learning.rate.epoch", learning_rate, epoch)
-            self.add_scalar("duration.epoch", duration, epoch)             
+            # self.add_scalar("training.loss.epoch", reduced_loss, epoch)
+            # self.add_scalar("grad.norm.epoch", grad_norm, epoch)
+            # self.add_scalar("learning.rate.epoch", learning_rate, epoch)
+            # self.add_scalar("duration.epoch", duration, epoch)             
 
     def log_validation(self, reduced_loss, model, y, y_pred, iteration, epoch):
         self.add_scalar("validation.loss.iteration", reduced_loss, iteration)
